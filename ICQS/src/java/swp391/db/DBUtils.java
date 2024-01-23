@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package swp391.db;
 
@@ -12,13 +11,13 @@ import java.sql.SQLException;
 
 /**
  *
- * @author hi
+ * @author cdkhu
  */
 public class DBUtils implements Serializable{
     public static Connection makeConnection(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ICQS";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=Assigment_FA223W";
             Connection con = DriverManager.getConnection(url,"sa","1234567890");
             return con;
         }catch(ClassNotFoundException e){
