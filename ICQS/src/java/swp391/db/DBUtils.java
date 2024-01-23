@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author cdkhu
+ * @author hi
  */
 public class DBUtils implements Serializable{
     public static Connection makeConnection(){
