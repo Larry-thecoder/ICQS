@@ -11,7 +11,7 @@ import java.util.Date;
  * @author cdkhu
  */
 public class UserDTO {
-    private int userId;
+    private int userID;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,14 +19,15 @@ public class UserDTO {
     private String phoneNumber;
     private Date dateOfBirth;
     private String image;
-    private Boolean status;
-    private int roleId;
+    private int status;
+    private int roleID;
+    private int notificationID;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userId, String firstName, String lastName, String email, String password, String phoneNumber, Date dateOfBirth, String image, Boolean status, int roleId) {
-        this.userId = userId;
+    public UserDTO(int userID, String firstName, String lastName, String email, String password, String phoneNumber, Date dateOfBirth, String image, int status, int roleID, int notificationID) {
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -35,15 +36,16 @@ public class UserDTO {
         this.dateOfBirth = dateOfBirth;
         this.image = image;
         this.status = status;
-        this.roleId = roleId;
+        this.roleID = roleID;
+        this.notificationID = notificationID;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -102,21 +104,29 @@ public class UserDTO {
         this.image = image;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public int getRoleID() {
+        return roleID;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
     }
-    
+
+    public int getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(int notificationID) {
+        this.notificationID = notificationID;
+    }
+
     
 }
