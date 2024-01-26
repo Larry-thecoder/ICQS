@@ -6,18 +6,12 @@ package swp391.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import swp391.user.UserDAO;
-import swp391.user.UserDTO;
 //import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServlet;
@@ -28,41 +22,23 @@ import swp391.user.UserDTO;
  *
  * @author cdkhu
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    private final String GUESS_PAGE = "index.html";
-    private final String LOGIN_FAILED = "invalid.html";
-    private final String ADMIN_PAGE = "admin.jsp";
+@WebServlet(name = "LogoutController", urlPatterns = {"/LogoutController"})
+public class LogoutController extends HttpServlet {
+    
+    private final String LOGIN_PAGE = "login.html";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String url = LOGIN_PAGE;
             
-            String email = request.getParameter("txtemail");
-            String password = request.getParameter("txtpassword");
-            String url = LOGIN_FAILED;
-            
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(email, password);
-            if(user != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", user);
-                int roleID = user.getRoleID();
-                if(roleID == 1){
-                    url = ADMIN_PAGE;
-                }else if(roleID == 3){
-                    url = GUESS_PAGE;
-                }else{
-                    session.setAttribute("ERROR_MESSAGE", "Your role is not support!");
-                }
-                Cookie cookie = new Cookie(email, password);
-                cookie.setMaxAge(120*1);
-                response.addCookie(cookie);
+            HttpSession session = request.getSession(false);
+            if(session != null){
+                session.invalidate();
+                url = LOGIN_PAGE;
             }
             response.sendRedirect(url);
-            
         }
     }
 
@@ -78,11 +54,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -96,11 +68,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
